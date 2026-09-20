@@ -9,8 +9,8 @@ const Header = () => {
   const links = [
     { name: "Home", to: "home" },
     { name: "About", to: "about" },
-    { name: "Projects", to: "projects" },
     { name: "Services", to: "services" },
+    { name: "Projects", to: "projects" },
     { name: "Contact", to: "contact" },
   ];
 
