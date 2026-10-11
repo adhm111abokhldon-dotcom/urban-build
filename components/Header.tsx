@@ -1,74 +1,94 @@
 "use client";
 
-import { RiArrowRightUpLine } from "react-icons/ri";
+import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 import { Link as ScrollLink } from "react-scroll";
+
+import { navItems, sectionIds } from "@/data/links";
+import { useActiveSection } from "@/hooks/useActiveSection";
+import { siteConfig } from "@/lib/site";
+import { cn } from "@/lib/utils";
+
+import Button from "./Button";
+import LanguageSwitcher from "./LanguageSwitcher";
 import Logo from "./Logo";
 import NavMobile from "./NavMobile";
 
 const Header = () => {
-  const links = [
-    { name: "Home", to: "home" },
-    { name: "About", to: "about" },
-    { name: "Services", to: "services" },
-    { name: "Projects", to: "projects" },
-    { name: "Contact", to: "contact" },
-  ];
+  const t = useTranslations("nav");
+  const common = useTranslations("common");
+  const activeSection = useActiveSection(sectionIds);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 8);
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="bg-primary py-4 z-50 sticky top-0">
-      <div className="px-5 md:px-10">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
+    <header
+      data-scrolled={isScrolled}
+      className="sticky top-0 z-50 bg-primary py-3 transition-shadow duration-300 data-[scrolled=true]:shadow-[0_12px_32px_-20px_rgb(0_0_0/0.8)]"
+    >
+      <div className="custom-container flex items-center justify-between gap-6">
+        <Logo />
 
-          <Logo />
+        {/* Desktop navigation */}
+        <nav aria-label={t("aria")} className="hidden items-center gap-8 xl:flex">
+          <ul className="flex items-center">
+            {navItems.map((item) => {
+              const isActive = activeSection === item.to;
 
-          {/* nav Desktop*/}
-          <nav className="hidden xl:flex items-center gap-12">
-            <ul className="flex">
-              {links.map((link) => (
+              return (
                 <li
-                  key={link.name}
-                  className="text-white text-sm font-primary font-medium tracking-[1.2px] 
-                  after:content-['/'] after:mx-4 last:after:content-none after:text-accent"
+                  key={item.key}
+                  className="after:mx-3.5 after:font-primary after:text-accent/50 after:content-['/'] last:after:content-none"
                 >
-                  {
-                    <ScrollLink
-                      to={link.to}
-                      smooth
-                      spy
-                      className="cursor-pointer"
-                      activeClass="text-accent"
-                    >
-                      {link.name}
-                    </ScrollLink>
-                  }
+                  <ScrollLink
+                    to={item.to}
+                    href={`#${item.to}`}
+                    smooth
+                    duration={500}
+                    offset={-siteConfig.headerOffset}
+                    aria-current={isActive ? "true" : undefined}
+                    className={cn(
+                      "relative inline-block py-1 font-primary text-sm font-medium tracked transition-colors duration-200",
+                      isActive ? "text-accent" : "text-white hover:text-accent",
+                    )}
+                  >
+                    {t(item.key)}
+                    <motion.span
+                      aria-hidden="true"
+                      className="absolute -bottom-0.5 left-0 h-px w-full origin-left bg-accent rtl:origin-right"
+                      initial={false}
+                      animate={{ scaleX: isActive ? 1 : 0 }}
+                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    />
+                  </ScrollLink>
                 </li>
-              ))}
-            </ul>
-            {/* btn */}
-            <button
-              className="w-50 h-13.5 py-1.25 bg-white
-           ps-4 pe-1.25 flex items-center justify-between min-w-50 group"
-            >
-              <div
-                className=" flex-1 text-center tracking-[1.2px]
-             text-primary  font-bold text-sm "
-              >
-                Get a quote
-              </div>
-              <div className="w-11 h-11  bg-primary flex items-center justify-center">
-                <RiArrowRightUpLine
-                  className="text-white text-xl group-hover:rotate-45
-                  transition-transform duration-200"
-                />
-              </div>
-            </button>
-          </nav>
+              );
+            })}
+          </ul>
 
-          {/* nav Mobile */}
-          <nav className="xl:hidden">
-            <NavMobile />
-          </nav>
+          <div className="flex items-center gap-6">
+            <LanguageSwitcher id="header" />
+            <Button
+              text={common("getQuote")}
+              to="#contact-us"
+              variant="light"
+              className="h-12 min-w-45"
+            />
+          </div>
+        </nav>
+
+        {/* Mobile navigation */}
+        <div className="xl:hidden">
+          <NavMobile activeSection={activeSection} />
         </div>
       </div>
     </header>
@@ -76,3 +96,4 @@ const Header = () => {
 };
 
 export default Header;
+

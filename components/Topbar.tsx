@@ -1,38 +1,55 @@
-import { RiPhoneFill, RiMailFill } from "react-icons/ri";
+import { useTranslations } from "next-intl";
+import { RiMailFill, RiPhoneFill } from "react-icons/ri";
+
+import { siteConfig } from "@/lib/site";
+
 import Socials from "./Socials";
 
 const Topbar = () => {
+  const t = useTranslations("topbar");
+
   return (
     <section
       id="home"
-      className="py-4 xl:h-16 xl:py-0 bg-linear-to-t from-[#ffc221] to-[#ffd76e] flex items-center"
+      aria-label={t("aria")}
+      className="flex items-center bg-linear-to-t from-[#ffc221] to-[#ffd76e] py-3 xl:h-16 xl:py-0"
     >
-      {" "}
       <div className="custom-container">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-          <div className="hidden xl:flex items-center gap-8">
-            {/* Phone */}
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-primary text-white flex items-center justify-center">
-                <RiPhoneFill />{" "}
-              </div>
-              <p className="font-medium text-primary">+971 56 142 0262</p>
-            </div>
-            {/* Mail */}
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-primary text-white flex items-center justify-center">
-                <RiMailFill />{" "}
-              </div>
-              <p className="font-medium text-primary">adham.aobeid@gmail.com</p>
-            </div>
-          </div>
+        <div className="flex flex-col items-center justify-between gap-3 md:flex-row">
+          <ul className="hidden items-center gap-8 xl:flex">
+            <li className="flex items-center gap-3">
+              <span
+                className="flex size-8 items-center justify-center bg-primary text-white"
+                aria-hidden="true"
+              >
+                <RiPhoneFill />
+              </span>
+              <a
+                href={siteConfig.phone.href}
+                aria-label={t("callLabel", { phone: siteConfig.phone.display })}
+                className="bidi-ltr font-medium text-primary transition-colors hover:text-primary/70"
+              >
+                {siteConfig.phone.display}
+              </a>
+            </li>
+            <li className="flex items-center gap-3">
+              <span
+                className="flex size-8 items-center justify-center bg-primary text-white"
+                aria-hidden="true"
+              >
+                <RiMailFill />
+              </span>
+              <a
+                href={siteConfig.email.href}
+                aria-label={t("emailLabel", { email: siteConfig.email.display })}
+                className="bidi-ltr font-medium text-primary transition-colors hover:text-primary/70"
+              >
+                {siteConfig.email.display}
+              </a>
+            </li>
+          </ul>
 
-          <div>
-            <Socials
-              containerStyles="flex items-center gap-8 mx-auto xl:mx-8"
-              forFooter={false}
-            />
-          </div>
+          <Socials className="xl:ms-8" />
         </div>
       </div>
     </section>
@@ -40,3 +57,4 @@ const Topbar = () => {
 };
 
 export default Topbar;
+

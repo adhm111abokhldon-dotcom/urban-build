@@ -1,0 +1,308 @@
+{
+  "metadata": {
+    "title": "Urban Build — Construction, Renovation & Restoration",
+    "description": "Urban Build delivers construction, renovation, restoration and consulting services. Get in touch to discuss your project and request a clear, itemised quote."
+  },
+  "common": {
+    "logoLabel": "Urban Build — back to top",
+    "skipToContent": "Skip to content",
+    "getQuote": "Get a quote",
+    "startProject": "Start a project",
+    "backToTop": "Back to top",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu",
+    "close": "Close",
+    "menuTitle": "Menu",
+    "menuDescription": "Primary navigation",
+    "socials": {
+      "aria": "Follow Urban Build",
+      "facebook": "Facebook",
+      "instagram": "Instagram"
+    }
+  },
+  "language": {
+    "label": "Language",
+    "groupLabel": "Choose a language",
+    "en": "English",
+    "ar": "العربية",
+    "switchTo": "Switch to {language}",
+    "current": "Current language: {language}"
+  },
+  "nav": {
+    "aria": "Primary",
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "topbar": {
+    "aria": "Contact details",
+    "callLabel": "Call Urban Build on {phone}",
+    "emailLabel": "Email Urban Build at {email}"
+  },
+  "hero": {
+    "title": "<accent>Building</accent> with care, from foundation to finish",
+    "description": "Urban Build handles construction, renovation, restoration and consulting. We start with a clear plan and a realistic quote, keep you updated throughout, and finish the work to a standard that lasts.",
+    "imageAlt": "Steel and concrete structure under construction",
+    "primaryCta": "See our work",
+    "secondaryCta": "Explore services"
+  },
+  "about": {
+    "pretitle": "About us",
+    "title": "A construction team you can talk to",
+    "description": "We're a construction business focused on getting the details right: honest quotes, clear timelines and tidy work. Whether it's a new build, a renovation, a repair or a second opinion on your plans, we treat your project like it matters — because it does.",
+    "imageAlt": "Construction professional reviewing building plans on site",
+    "cta": "Contact us"
+  },
+  "principles": {
+    "aria": "How we work",
+    "items": {
+      "planning": {
+        "title": "Clear planning",
+        "description": "Every project starts with a written scope and schedule, so you know what happens and when."
+      },
+      "communication": {
+        "title": "Open communication",
+        "description": "One point of contact and regular updates, so you're never guessing where the work stands."
+      },
+      "workmanship": {
+        "title": "Solid workmanship",
+        "description": "Experienced trades and quality materials, finished to a standard we're proud to put our name to."
+      },
+      "coordination": {
+        "title": "Coordinated delivery",
+        "description": "We manage the schedule, trades and site so the work runs smoothly from start to handover."
+      }
+    }
+  },
+
+  "services": {
+    "pretitle": "Our services",
+    "title": "What we do",
+    "description": "Four core services covering new builds, improvements, repairs and expert advice. Each project is scoped and quoted before any work begins.",
+    "listAria": "Included in {service}",
+    "cta": "Request a quote",
+    "items": {
+      "construction": {
+        "title": "Construction services",
+        "tab": "Construction",
+        "description": "We build with care from the ground up, making sure every structure is sound and built to last. From foundations to the final finishes, we turn approved plans into a finished building.",
+        "list": [
+          "Residential builds",
+          "Structural work",
+          "Foundations",
+          "Site preparation",
+          "Framing and roofing",
+          "Interior finishing"
+        ]
+      },
+      "renovation": {
+        "title": "Renovation services",
+        "tab": "Renovation",
+        "description": "Updating and improving the spaces you already have. Whether it's a single room or a whole property, we plan the work around how you use the space and finish it cleanly.",
+        "list": [
+          "Kitchen and bathroom remodelling",
+          "Extensions and conversions",
+          "Flooring and tiling",
+          "Carpentry and joinery",
+          "Painting and decorating",
+          "Layout changes"
+        ]
+      },
+      "restoration": {
+        "title": "Restoration services",
+        "tab": "Restoration",
+        "description": "Repairing structures that have been damaged or have simply aged. We assess the problem first, then carry out the repairs needed to make the building safe and sound again.",
+        "list": [
+          "Structural repair",
+          "Water and damp damage",
+          "Fire damage repair",
+          "Crack and concrete repair",
+          "Roof repair and waterproofing",
+          "Façade restoration"
+        ]
+      },
+      "consulting": {
+        "title": "Consulting services",
+        "tab": "Consulting",
+        "description": "Practical advice before and during your project. We help you plan the work, understand the costs and avoid common mistakes — useful whether we build it or not.",
+        "list": [
+          "Feasibility and planning advice",
+          "Cost estimation and budgeting",
+          "Scope and specification review",
+          "Contractor and trade coordination",
+          "Site inspections and reporting",
+          "Permit and compliance guidance"
+        ]
+      }
+    }
+  },
+
+  "work": {
+    "pretitle": "Our work",
+    "title": "The kind of work we take on",
+    "description": "These are the main types of projects we handle. Each one is scoped, quoted and delivered to fit the site and the brief.",
+    "enquire": "Enquire about {project}",
+    "imageAlt": "Example of {project} work",
+    "items": {
+      "restoration": {
+        "name": "Restoration",
+        "description": "Repair and renew ageing or damaged structures"
+      },
+      "construction": {
+        "name": "Construction",
+        "description": "New builds from foundation to finish"
+      },
+      "renovation": {
+        "name": "Renovation",
+        "description": "Upgrade and transform existing spaces"
+      },
+      "consulting": {
+        "name": "Consulting",
+        "description": "Expert advice on planning and delivery"
+      }
+    }
+  },
+  "approach": {
+    "pretitle": "How we work",
+    "title": "From first call to handover",
+    "description": "A straightforward process that keeps your project clear, on schedule and free of surprises.",
+    "imageAlt": "Building under construction with completed structural work",
+    "cta": "Start your project",
+    "steps": {
+      "consult": {
+        "title": "Consultation",
+        "description": "We talk through your goals, visit the site if needed, and understand the full scope of the work."
+      },
+      "estimate": {
+        "title": "Scope & quote",
+        "description": "You receive a clear, itemised scope and a realistic quote before anything is committed."
+      },
+      "build": {
+        "title": "Build",
+        "description": "Our team carries out the work to schedule, with regular updates and a tidy, safe site."
+      },
+      "handover": {
+        "title": "Handover",
+        "description": "We walk you through the finished work, resolve any snags, and leave the site clean."
+      }
+    }
+  },
+
+  "faq": {
+    "pretitle": "FAQ",
+    "title": "Got questions?<br></br>We have you covered",
+    "description": "From project planning to the final details, these are the answers to the questions we hear most often about working together.",
+    "cta": {
+      "title": "Still have a question?",
+      "description": "Talk to our team about your project and get a clear answer before you commit.",
+      "action": "Talk to our team"
+    },
+    "items": {
+      "timeline": {
+        "question": "How long does a construction project usually take?",
+        "answer": "Timelines vary with the size and complexity of the project. After a site visit we issue a schedule with clear milestones, and you receive progress updates at every stage."
+      },
+      "permits": {
+        "question": "Do I need permits for my project?",
+        "answer": "Most construction projects require permits. We identify which approvals apply to your site and can guide you through the submissions."
+      },
+      "materials": {
+        "question": "What materials do you use?",
+        "answer": "We use quality, durable materials selected to suit the project, the design and local safety requirements. The specification is agreed with you before work starts."
+      },
+      "changes": {
+        "question": "Can I make changes after construction starts?",
+        "answer": "Yes. Changes are possible, but they may affect the timeline and the cost. We document every variation and confirm it with you before the work continues."
+      },
+      "cost": {
+        "question": "How much will my construction project cost?",
+        "answer": "Cost depends on the size, materials, design and scope of the work. We provide a clear, itemised estimate based on your specific requirements."
+      },
+      "safety": {
+        "question": "How do you ensure quality and safety on-site?",
+        "answer": "We follow recognised quality and safety practices, with regular site checks and documented progress throughout the project."
+      }
+    }
+  },
+
+  "contact": {
+    "pretitle": "Contact",
+    "title": "Let's talk about your project",
+    "description": "Send us the details and we'll come back to you with next steps. You can also reach us directly by phone, email or WhatsApp.",
+    "channels": {
+      "aria": "Direct contact",
+      "phone": "Phone",
+      "email": "Email",
+      "whatsapp": "WhatsApp"
+    },
+    "form": {
+      "title": "Request a quote",
+      "description": "Fill in a few details and we'll prepare a message you can send straight to us.",
+      "optional": "optional",
+      "fields": {
+        "name": {
+          "label": "Full name",
+          "placeholder": "e.g. Sara Ahmed"
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "you@example.com"
+        },
+        "phone": {
+          "label": "Phone",
+          "placeholder": "+971 50 000 0000"
+        },
+        "service": {
+          "label": "Service needed",
+          "placeholder": "Select a service"
+        },
+        "message": {
+          "label": "Project details",
+          "placeholder": "Location, size, timeline and anything else we should know."
+        }
+      },
+      "options": {
+        "construction": "Construction",
+        "renovation": "Renovation",
+        "restoration": "Restoration",
+        "consulting": "Consulting",
+        "other": "Something else"
+      },
+      "submit": "Prepare message",
+      "submitting": "Preparing…",
+      "privacy": "We only use your details to respond to your enquiry.",
+      "validation": {
+        "required": "This field is required.",
+        "nameShort": "Please enter at least 2 characters.",
+        "emailInvalid": "Please enter a valid email address.",
+        "phoneInvalid": "Please enter a valid phone number.",
+        "messageShort": "Please give us at least 10 characters."
+      },
+      "ready": {
+        "title": "Your message is ready",
+        "description": "Choose how you'd like to send it. Nothing is submitted from this page — you'll review and send it yourself from your own email or WhatsApp.",
+        "emailAction": "Open in email",
+        "whatsappAction": "Send on WhatsApp",
+        "editAction": "Edit details",
+        "subject": "Project enquiry from {name}"
+      }
+    }
+  },
+  "footer": {
+    "description": "Construction, renovation, restoration and consulting — delivered by a team that cares about the details.",
+    "explore": "Explore",
+    "services": "Services",
+    "contact": "Get in touch",
+    "rights": "© {year} Urban Build. All rights reserved.",
+    "backToTop": "Back to top"
+  },
+  "notFound": {
+    "pretitle": "404",
+    "title": "This page could not be found",
+    "description": "The link may be broken or the page may have moved. Head back to the home page to continue browsing.",
+    "action": "Back to home"
+  }
+}
+

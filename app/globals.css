@@ -3,176 +3,271 @@
 @import "shadcn/tailwind.css";
 
 @theme {
+  /* -------------------------------- */
+  /* Colors */
+  /* -------------------------------- */
   --color-primary: #121325;
-  --color-secondary: #666666;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #4b5563;
+  --color-secondary-foreground: #ffffff;
   --color-accent: #ffca3b;
-  --color-border: #d7d7d7;
-  --shadow-custom: 0px 4px 54px 10px rgba(18, 19, 21, 0.06);
+  --color-accent-foreground: #121325;
+  --color-muted: #f4f4f2;
+  --color-muted-foreground: #6b7280;
+  --color-surface: #f8f8f6;
+  --color-background: #ffffff;
+  --color-foreground: #121325;
+  --color-card: #ffffff;
+  --color-card-foreground: #121325;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #121325;
+  --color-border: #e5e7eb;
+  --color-input: #e5e7eb;
+  --color-ring: #ffca3b;
+  --color-destructive: #b42318;
+
+  /* -------------------------------- */
+  /* Shape — the brand is square, so the primitives follow suit */
+  /* -------------------------------- */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+
+  /* -------------------------------- */
+  /* Depth */
+  /* -------------------------------- */
+  --shadow-custom: 0 8px 40px rgba(18, 19, 37, 0.07);
+
+  /* -------------------------------- */
+  /* Layout */
+  /* -------------------------------- */
+  --header-offset: 4.5rem;
+
+  /* -------------------------------- */
+  /* Backgrounds */
+  /* -------------------------------- */
   --background-image-hero: url("/assets/img/hero/bg.jpg");
-  --font-primary: var(--font-dmSans);
-  --font-secondary: var(--font-barlow);
+
+  /* -------------------------------- */
+  /* Fonts — English by default; Arabic families take over under */
+  /* `html[dir="rtl"]` (see the base layer below), driven by the */
+  /* locale `dir` attribute set in `app/[locale]/layout.tsx`. */
+  /* Headings: DM Sans (EN) / IBM Plex Sans Arabic (AR). */
+  /* Body: Barlow (EN) / Noto Sans Arabic (AR). */
+  /* -------------------------------- */
+  --font-primary: var(--font-dmSans), ui-sans-serif, system-ui, sans-serif;
+  --font-secondary: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-dmSans), ui-sans-serif, system-ui, sans-serif;
 }
+
+/* -------------------------------- */
+/* Direction-aware utilities */
+/* -------------------------------- */
+
+@custom-variant rtl (&:where([dir="rtl"], [dir="rtl"] *));
 
 @utility custom-container {
-  @apply w-full mx-auto px-5 sm:px-8 md:px-12 lg:px-24 xl:px-40 max-w-300;
+  @apply w-full max-w-300 mx-auto px-6 sm:px-10 md:px-12 lg:px-16 xl:px-24;
 }
 
-body {
-  @apply font-secondary text-secondary;
+/**
+ * Uppercase micro-label. Arabic has no letter case and letter-spacing
+ * visually breaks the joined script, so both are reset for RTL.
+ */
+@utility eyebrow {
+  font-family: var(--font-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+
+  :where([dir="rtl"]) & {
+    text-transform: none;
+    letter-spacing: 0;
+  }
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  @apply font-primary text-primary;
+/** Loose tracking for Latin UI text (reset for Arabic). */
+@utility tracked {
+  letter-spacing: 0.075em;
+
+  :where([dir="rtl"]) & {
+    letter-spacing: 0;
+  }
 }
 
-h1 {
-  @apply text-[40px] xl:text-[54px] uppercase font-black leading-[1.1];
+/** Keeps phone numbers, emails and figures in logical LTR order inside RTL text. */
+@utility bidi-ltr {
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 
-h2 {
-  @apply text-[36px] xl:text-[46px]  font-bold capitalize leading-[1.3];
+/**
+ * Hero scrim: darkest behind the copy, lightest over the photograph.
+ * Written as one utility so the direction swap is deterministic.
+ */
+@utility hero-overlay {
+  background-image: linear-gradient(
+    to left,
+    rgba(18, 19, 37, 0.15) 0%,
+    rgba(18, 19, 37, 0.68) 55%,
+    rgba(18, 19, 37, 0.92) 100%
+  );
+
+  :where([dir="rtl"]) & {
+    background-image: linear-gradient(
+      to right,
+      rgba(18, 19, 37, 0.15) 0%,
+      rgba(18, 19, 37, 0.68) 55%,
+      rgba(18, 19, 37, 0.92) 100%
+    );
+  }
 }
 
-h3 {
-  @apply font-bold text-3xl;
-}
+/* -------------------------------- */
+/* Base */
+/* -------------------------------- */
 
-h4 {
-  @apply font-semibold text-2xl;
-}
-
-button {
-  @apply cursor-pointer;
-}
-
-/* @custom-variant dark (&:is(.dark *));
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
-}
-
-:root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-}
-
+/**
+ * Base styles live in the `base` layer so component-level utilities
+ * (e.g. `text-white`, `leading-tight`) can override them without `!important`.
+ */
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
   html {
-    @apply font-sans;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
-} */
+
+  body {
+    @apply bg-background font-secondary text-secondary antialiased;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+
+  /**
+   * Links that are not built on a UI primitive get an outline in the brand
+   * accent. Focus rings for inputs and buttons live in the primitives.
+   */
+  a:focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+
+  /* -------------------------------- */
+  /* Typography */
+  /* -------------------------------- */
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-primary text-primary;
+  }
+
+  h1 {
+    @apply text-[40px] sm:text-[46px] lg:text-[52px] xl:text-[56px]
+      font-black leading-[1.08] tracking-[-0.02em];
+    text-wrap: balance;
+  }
+
+  h2 {
+    @apply text-[32px] sm:text-[38px] lg:text-[44px] xl:text-[48px]
+      font-bold leading-[1.15] tracking-[-0.02em];
+    text-wrap: balance;
+  }
+
+  h3 {
+    @apply text-2xl sm:text-[28px] font-bold leading-[1.2];
+    text-wrap: balance;
+  }
+
+  h4 {
+    @apply text-xl sm:text-2xl font-semibold leading-[1.25];
+  }
+
+  p {
+    @apply leading-[1.7];
+    text-wrap: pretty;
+  }
+
+  /* -------------------------------- */
+  /* Arabic (RTL) typography — fonts switch automatically with the */
+  /* locale direction: headings use IBM Plex Sans Arabic, body text */
+  /* (plus buttons, forms, nav, footer — everything on `font-primary` */
+  /* / `font-secondary`) uses Noto Sans Arabic. */
+  /* -------------------------------- */
+
+  html[dir="rtl"] {
+    --font-primary: var(--font-head-ar), ui-sans-serif, system-ui, sans-serif;
+    --font-secondary: var(--font-body-ar), ui-sans-serif, system-ui, sans-serif;
+    --font-heading: var(--font-head-ar), ui-sans-serif, system-ui, sans-serif;
+  }
+
+  html[dir="rtl"] body {
+    letter-spacing: 0;
+  }
+
+  html[dir="rtl"] :is(h1, h2) {
+    /* Arabic needs more vertical room than Latin display type. */
+    line-height: 1.35;
+    letter-spacing: 0;
+  }
+
+  html[dir="rtl"] :is(h3, h4) {
+    line-height: 1.45;
+    letter-spacing: 0;
+  }
+
+  html[dir="rtl"] p {
+    line-height: 1.85;
+  }
+
+  /* -------------------------------- */
+  /* Anchors */
+  /* -------------------------------- */
+
+  /* Keeps section headings clear of the sticky header when jumping to an anchor. */
+  :where(
+    #home,
+    #about,
+    #services,
+    #projects,
+    #approach,
+    #faq,
+    #contact-us
+  ) {
+    scroll-margin-top: var(--header-offset);
+  }
+
+  /* -------------------------------- */
+  /* Selection */
+  /* -------------------------------- */
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-primary);
+  }
+}
+
+/* -------------------------------- */
+/* Motion preferences */
+/* -------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

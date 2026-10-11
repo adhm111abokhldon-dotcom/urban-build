@@ -1,15 +1,19 @@
-import React from "react";
+import { cn } from "@/lib/utils";
 
 const Pretitle = ({ text, center }: { text: string; center?: boolean }) => {
   return (
     <div
-      className={`flex items-center gap-3 mb-4 ${center && "justify-center"}`}
+      className={cn(
+        "mb-4 flex items-center gap-3",
+        center && "justify-center",
+      )}
     >
-      <div className="w-2 h-2 bg-accent "></div>
-      <p className="font-primary tracking-[3.2px] uppercase">{text}</p>
-      <div className="w-2 h-2 bg-accent "></div>
+      <span className="size-2 shrink-0 bg-accent" aria-hidden="true" />
+      <p className="eyebrow text-sm font-medium text-primary">{text}</p>
+      <span className="size-2 shrink-0 bg-accent" aria-hidden="true" />
     </div>
   );
 };
 
 export default Pretitle;
+

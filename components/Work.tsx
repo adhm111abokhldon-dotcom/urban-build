@@ -1,89 +1,79 @@
 import Image from "next/image";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { RiArrowRightUpLine, RiCheckboxCircleFill } from "react-icons/ri";
-import Pretitle from "./Pretitle";
 
-const workData = [
-  {
-    img: "/assets/img/work/restoration.jpg",
-    name: "restoration",
-    description: "Restore and renew  ",
-    href: "",
-  },
-  {
-    img: "/assets/img/work/construction.jpg",
-    name: "construction",
-    description: "Build with precision",
-    href: "",
-  },
-  {
-    img: "/assets/img/work/renovation.jpg",
-    name: "renovation",
-    description: "Transform your space ",
-    href: "",
-  },
-  {
-    img: "/assets/img/work/consulting.jpg",
-    name: "consulting",
-    description: "Get expert guidance",
-    href: "",
-  },
-];
+import { workItems } from "@/data/work";
+
+import Reveal from "./Reveal";
+import SectionHeading from "./SectionHeading";
 
 const Work = () => {
-  return (
-    <div id="projects" className="pt-16 xl:pt-32">
-      <div className="custom-container">
-        <div className="text-center max-w-135 mx-auto xl:mb-20">
-          <Pretitle text="Our Work" center={true} />
-          <h2 className="mb-3">Discover Our Projects</h2>
-          <p className="mb-11 mx-auto max-w-120">
-            Providing expert services designer to deliver quality and innovation
-            in every project we undertake.
-          </p>
-        </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
-        {workData.map((item) => (
-          <div
-            key={item.name}
-            className="w-full h-123 flex-1 relative overflow-hidden group flex justify-center"
-          >
-            <Image
-              src={item.img}
-              alt=""
-              fill
-              className="object-cover"
-              quality={100}
-            />
-            <div
-              className="w-[90%] h-21 bg-primary absolute bottom-4 flex
-            justify-between items-center text-white! md:translate-y-25 md:group-hover:translate-y-0
-            transition-all duration-400"
-            >
-              <div className="ps-8">
-                <h4 className="text-white! font-primary! tracking-[1px] uppercase font-semibold! text-base!">
-                  {item.name}
-                </h4>
+  const t = useTranslations("work");
 
-                <div className="flex items-center gap-1">
-                  <RiCheckboxCircleFill className="text-accent text-xl " />
-                  <p>{item.description}</p>
-                </div>
-              </div>
-              <Link
-                href={item.href}
-                className="w-11  xl:w-15 h-11  xl:h-15 bg-accent text-primary text-2xl
-                flex justify-center items-center absolute right-3 "
-              >
-                <RiArrowRightUpLine />
-              </Link>
-            </div>
-          </div>
-        ))}
+  return (
+    <section id="projects" className="pt-16 xl:pt-32">
+      <div className="custom-container">
+        <Reveal>
+          <SectionHeading
+            align="center"
+            pretitle={t("pretitle")}
+            title={<h2>{t("title")}</h2>}
+            description={t("description")}
+            className="mb-14 max-w-135 xl:mb-20"
+          />
+        </Reveal>
       </div>
-    </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+        {workItems.map(({ id, img }, index) => {
+          const name = t(`items.${id}.name`);
+
+          return (
+            <Reveal key={id} delay={index * 0.06}>
+              <article className="group relative flex h-[26rem] w-full justify-center overflow-hidden bg-primary xl:h-123">
+                <Image
+                  src={img}
+                  alt={t("imageAlt", { project: name })}
+                  fill
+                  sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                />
+
+                <div className="absolute inset-x-4 bottom-4 flex items-stretch justify-between bg-primary text-white transition-transform duration-300 md:translate-y-[calc(100%+1.5rem)] md:group-focus-within:translate-y-0 md:group-hover:translate-y-0">
+                  <div className="min-w-0 ps-6">
+                    <h3 className="eyebrow py-4 text-base font-semibold text-white">
+                      {name}
+                    </h3>
+                    <p className="flex items-center gap-1.5 pb-4 text-sm text-white/75">
+                      <RiCheckboxCircleFill
+                        className="shrink-0 text-accent"
+                        aria-hidden="true"
+                      />
+                      <span className="truncate">
+                        {t(`items.${id}.description`)}
+                      </span>
+                    </p>
+                  </div>
+
+                  <a
+                    href="#contact-us"
+                    aria-label={t("enquire", { project: name })}
+                    className="flex w-12 shrink-0 items-center justify-center bg-accent text-2xl text-primary transition-colors duration-200 hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-primary xl:w-15"
+                  >
+                    <RiArrowRightUpLine
+                      className="rtl:-scale-x-100"
+                      aria-hidden="true"
+                    />
+                  </a>
+                </div>
+              </article>
+            </Reveal>
+          );
+        })}
+      </div>
+    </section>
   );
 };
 
 export default Work;
+

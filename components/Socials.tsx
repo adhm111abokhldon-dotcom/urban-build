@@ -1,56 +1,60 @@
-import Link from "next/link";
-
+import { useTranslations } from "next-intl";
 import {
   RiFacebookFill,
-  RiYoutubeFill,
-  RiTwitterXFill,
   RiInstagramFill,
 } from "react-icons/ri";
 
-const socials = [
-  {
-    icon: <RiFacebookFill />,
-    path: "https://www.facebook.com/adhm.k.aobeid/",
-    classname: "text-[#1877F2] hover:text-[#166FE5]",
-  },
-  {
-    icon: <RiYoutubeFill />,
-    path: "https://www.youtube.com/",
-    classname: "text-[#FF0000] hover:text-[#CC0000",
-  },
-  {
-    icon: <RiTwitterXFill />,
-    path: "https://x.com/",
-    classname: "text-[#000000] hover:text-[#1A1A1A",
-  },
-  {
-    icon: <RiInstagramFill />,
-    path: "https://www.instagram.com/adhmaobeid/?hl=en",
-    classname: "text-[#E4405F] hover:text-[#C14584",
-  },
-];
+import { siteConfig, type SocialId } from "@/lib/site";
+import { cn } from "@/lib/utils";
 
+const icons: Record<SocialId, typeof RiFacebookFill> = {
+  facebook: RiFacebookFill,
+  instagram: RiInstagramFill,
+};
+
+/**
+ * Brand links. `tone` adapts the colour to the surface it sits on
+ * (yellow top bar, dark header sheet, light footer).
+ */
 const Socials = ({
-  containerStyles,
-  forFooter,
+  tone = "dark-on-light",
+  className,
 }: {
-  containerStyles: string;
-  forFooter: boolean;
+  tone?: "dark-on-light" | "light-on-dark";
+  className?: string;
 }) => {
+  const t = useTranslations("common.socials");
+
   return (
-    <div className={containerStyles}>
-      {socials.map((social) => (
-        <Link
-          target="_blank"
-          href={social.path}
-          key={social.path}
-          className={`${forFooter ? social.classname : "text-primary"}`}
-        >
-          {social.icon}
-        </Link>
-      ))}
-    </div>
+    <ul
+      aria-label={t("aria")}
+      className={cn("flex items-center gap-1", className)}
+    >
+      {siteConfig.socials.map(({ id, href }) => {
+        const Icon = icons[id];
+
+        return (
+          <li key={id}>
+            <a
+              href={href}
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label={`${t(id)} (${t("aria")})`}
+              className={cn(
+                "inline-flex size-9 items-center justify-center transition-colors duration-200",
+                tone === "light-on-dark"
+                  ? "text-white/65 hover:text-accent"
+                  : "text-primary/70 hover:text-primary",
+              )}
+            >
+              <Icon className="text-lg" aria-hidden="true" />
+            </a>
+          </li>
+        );
+      })}
+    </ul>
   );
 };
 
 export default Socials;
+
